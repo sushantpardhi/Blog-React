@@ -3,7 +3,7 @@ import "./sidebar.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const Sidebar = () => {
+const Sidebar = (post) => {
   const [cats, setCats] = useState([]);
 
   const getCats = async () => {

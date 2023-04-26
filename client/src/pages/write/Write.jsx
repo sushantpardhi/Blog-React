@@ -6,6 +6,7 @@ import { Context } from "../../context/Context";
 const Write = () => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
+  const [categories, setCategory] = useState("");
   const [file, setFile] = useState(null);
   const { user } = useContext(Context);
 
@@ -14,6 +15,7 @@ const Write = () => {
     const newpost = {
       username: user.username,
       title,
+      categories,
       desc,
     };
     if (file) {
@@ -58,6 +60,14 @@ const Write = () => {
             className="write-input"
             autoFocus={true}
             onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+        <div className="write-form-group">
+          <input
+            type="text"
+            placeholder="Category"
+            className="write-input"
+            onChange={(e) => setCategory(e.target.value)}
           />
         </div>
         <div className="write-form-group">

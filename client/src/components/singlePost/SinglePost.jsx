@@ -8,15 +8,16 @@ const SinglePost = () => {
   const location = useLocation();
   const path = location.pathname.split("/")[2];
   const [post, setpost] = useState({});
-  const PF = "http://localhost:5000/images/";
-  const { user } = useContext(Context);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
+  const PF = "http://localhost:5000/images/";
+  const { user } = useContext(Context);
   const [updateMode, setUpdateMode] = useState(false);
 
   useEffect(() => {
     const getPost = async () => {
       const res = await axios.get("http://localhost:5000/api/posts/" + path);
+      // console.log(res.data); 
       setpost(res.data);
       setTitle(res.data.title);
       setDesc(res.data.desc);
@@ -25,26 +26,26 @@ const SinglePost = () => {
   }, [path]);
 
   const handleUpdate = async () => {
-    try {
-      await axios.put(`http://localhost:5000/api/posts/${post._id}`, {
-        username: user.username,
-        title,
-        desc,
-      });
-      setUpdateMode(false);
-    } catch (err) {}
+      try {
+        await axios.put(`http://localhost:5000/api/posts/${post._id}`, {
+          username: user.username,
+          title,
+          desc,
+        });
+        setUpdateMode(false);
+      } catch (err) {}
   };
 
   const handleDelete = async () => {
-    try {
-      await axios.delete(`http://localhost:5000/api/posts/${post._id}`, {
-        data: { username: user.username },
-      });
-      window.location.replace("/");
-    } catch (err) {}
+      try {
+        await axios.delete(`http://localhost:5000/api/posts/${post._id}`, {
+          data: { username: user.username },
+        });
+        window.location.replace("/");
+      } catch (err) {}
   };
 
-  console.log(post.username === user.username);
+  // console.log(post.username === user.username);
   return (
     <div className="singlepost">
       <div className="singlepost-wrapper">

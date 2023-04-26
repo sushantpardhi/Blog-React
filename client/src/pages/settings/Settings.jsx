@@ -9,7 +9,6 @@ const Settings = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [success, setSuccess] = useState(false);
 
   const { user } = useContext(Context);
 
@@ -21,12 +20,13 @@ const Settings = () => {
       email,
       password,
     };
+
     if (file) {
       const data = new FormData();
       const filename = Date.now() + file.name;
       data.append("name", filename);
       data.append("file", file);
-      updatedUser.profilepicture = filename;
+      updatedUser.ProfilePicture = filename;
       try {
         await axios.post("http://localhost:5000/api/upload", data);
       } catch (err) {}
@@ -86,13 +86,12 @@ const Settings = () => {
           <button className="settings-submit" type="submit">
             Update
           </button>
-          {success && (
-            <span
-              style={{ color: "teal", textAlign: "center", marginTop: "20px" }}
-            >
-              Profile Updated
-            </span>
-          )}
+
+          <span
+            style={{ color: "teal", textAlign: "center", marginTop: "20px" }}
+          >
+            Profile Updated
+          </span>
         </form>
       </div>
       <Sidebar />
